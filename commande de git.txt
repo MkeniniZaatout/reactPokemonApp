@@ -1,0 +1,13 @@
+ git clone https://github.com/LP-IDSE-16-17/geo-d-team_trompette.git
+   95  ls
+   96  git pull
+   97  cd geo-d-team_trompette/
+   98  git pull
+   99  ls
+  100  clear
+  101  ls
+  102  nano README.md
+  103  git add Jenkinsfile.xml
+  104  git comit -m "Ajout du fichier Jenkinsfile"
+  105  git commit -m "Ajout du fichier Jenkinsfile"
+  106  git push origin master
