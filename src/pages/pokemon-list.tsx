@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
+import PokemonCard from '../components/pokemon-card';
 import Pokemon from '../models/pokemon';
 import POKEMONS from '../models/mock-pokemon';
-import PokemonCard from '../components/pokemon-card';
 
 const Pokemonlist: FunctionComponent = () => {
 
@@ -10,7 +10,6 @@ const Pokemonlist: FunctionComponent = () => {
     useEffect(() => {
         setPokemons(POKEMONS);
     }, []);
-
     return (
         <div>
             <h1 className="center">Pokédex</h1>
@@ -24,4 +23,5 @@ const Pokemonlist: FunctionComponent = () => {
         </div>
     );
 }
+
 export default Pokemonlist;
