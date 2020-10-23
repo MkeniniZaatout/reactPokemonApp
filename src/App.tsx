@@ -4,7 +4,7 @@ import PokemonDetail from './pages/pokemon-detail';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 // import { FruitsAPI, Fruit, currentUserd} from './quelque-part'
 // J'ajoute ça peut être -> import POKEMONS from './models/mock-pokemons';
-import PokemonsDetail from './components/pokemon-form'
+import PokemonEdit from './pages/pokemon-edit'
 import PageNotfound from './pages/page-not-found';
 
 const App: FunctionComponent = () => {
@@ -24,7 +24,7 @@ const App: FunctionComponent = () => {
                 <Route exact path="/pokemons/:id" component={PokemonDetail} />
                 {/** 404 Page not found : Toujours à mettre à la fin des route 
                  * sinon toute les routes seront intercepter par la route PageNotfound */}
-                <Route path="/pokemons/detail/:id" component={PokemonsDetail} />
+                <Route path="/pokemons/edit/:id" component={PokemonEdit} />
                 <Route component={PageNotfound} />
             </Switch>
         </div>

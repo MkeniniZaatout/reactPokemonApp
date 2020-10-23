@@ -31,12 +31,12 @@ const PokemonForm: FunctionComponent<Props> = ({pokemon}) => {
                 {/* Pokemon hp */}
                 <div className="form-group">
                   <label htmlFor="hp">Point de vie</label>
-                  <input id="hp" type="number" className="form-control"></input>
+                  <input id="hp" type="number" className="form-control" min="0"></input>
                 </div>
                 {/* Pokemon cp */}
                 <div className="form-group">
                   <label htmlFor="cp">Dégâts</label>
-                  <input id="cp" type="number" className="form-control"></input>
+                  <input id="cp" type="number" className="form-control" min="0"></input>
                 </div>
                 {/* Pokemon types */}
                 <div className="form-group">
