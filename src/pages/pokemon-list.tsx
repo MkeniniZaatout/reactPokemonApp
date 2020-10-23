@@ -7,6 +7,7 @@ const Pokemonlist: FunctionComponent = () => {
 
     const [pokemons, setPokemons] = useState<Pokemon[]>([]);
 
+
     useEffect(() => {
         setPokemons(POKEMONS);
     }, []);
