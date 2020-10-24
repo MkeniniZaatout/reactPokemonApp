@@ -21,7 +21,7 @@ const PokemonEdit: FunctionComponent<RouteComponentProps<Params>> = ({ match }) 
   return (
     <div>
       { pokemon ? (
-        <div className="row">
+        <div>
             <h2 className="header center">Éditer { pokemon.name }</h2>
             <PokemonForm pokemon={pokemon}></PokemonForm>
         </div>
