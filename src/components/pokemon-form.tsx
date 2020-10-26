@@ -29,7 +29,7 @@ const PokemonForm: FunctionComponent<Props> = ({pokemon}) => {
         cp: { value: pokemon.cp, isValid: true},
         types: { value: pokemon.types, isValid: true},
     };
-    
+    // get pokemonInfo with useState type form FROM pokemon-detail 
     const [form, setForm] = useState<Form>(pokemonInfo);
 
     const types: string[] = [
@@ -90,12 +90,12 @@ const PokemonForm: FunctionComponent<Props> = ({pokemon}) => {
                 {/* Pokemon hp */}
                 <div className="form-group">
                     <label htmlFor="hp">Point de vie</label>
-                    <input id="hp" name="hp" type="number" className="form-control" min="0"  value={form.cp.value} onChange={e => handleInputChange(e)}/>
+                    <input id="hp" name="hp" type="number" className="form-control" min="0" max="999" value={form.hp.value} onChange={e => handleInputChange(e)} />
                 </div>
                 {/* Pokemon cp */}
                 <div className="form-group">
                     <label htmlFor="cp">Dégâts</label>
-                    <input id="cp" name="cp" type="number" className="form-control" min="0" placeholder={'Dégâts'} value={form.hp.value} onChange={e => handleInputChange(e)} />
+                    <input id="cp" name="cp" type="number" className="form-control" min="0" max="999" value={form.cp.value} onChange={e => handleInputChange(e)} />
                 </div>
                 {/* Pokemon types */}
                 <div className="form-group">
