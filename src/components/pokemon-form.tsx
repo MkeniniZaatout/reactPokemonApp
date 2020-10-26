@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from 'react';
 import Pokemon from '../models/pokemon';
 import formatType from '../helpers/format-type';
-  
+import { useHistory } from 'react-router-dom';
 type Props = {
   pokemon: Pokemon
 };
@@ -18,9 +18,10 @@ type Form = {
     cp: Field,
     types: Field
 }
+
 // ToDo : comprendre comment l'objet pokemon est récupéré entierement ? -> recuperer dans pokemon-edit avec useState
 const PokemonForm: FunctionComponent<Props> = ({pokemon}) => {
-    console.log('pokemon',pokemon);
+    const history:any = useHistory();
 
     let pokemonInfo = {
         name: { value: pokemon.name, isValid: true},
@@ -37,8 +38,6 @@ const PokemonForm: FunctionComponent<Props> = ({pokemon}) => {
     ];
 
     const hasType = (type: string): boolean => {
-        console.log("test",form.types);
-        
         return form.types.value.includes(type);
     };
 
@@ -63,10 +62,18 @@ const PokemonForm: FunctionComponent<Props> = ({pokemon}) => {
             newTypes = form.types.value.filter((currentTypes: string) => currentTypes !== type);
         }
         newField = {value: newTypes };
+        // Comprendre
+        setForm({...form,...{types: newField} });
+    }
+    
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        console.log(form);
+        history.push(`/pokemons/${pokemon.id}`);
     }
 
     return (
-    <form>
+    <form onSubmit={(e) => handleSubmit(e)}>
         <div className="row">
         <div className="col s12 m8 offset-m2">
             <div className="card hoverable"> 
@@ -78,17 +85,17 @@ const PokemonForm: FunctionComponent<Props> = ({pokemon}) => {
                 {/* Pokemon name */}
                 <div className="form-group">
                     <label htmlFor="name">Nom</label>
-                    <input id="name" name="name" type="text" className="form-control" placeholder={'Nouveau nom du pokémon'} value={form.name.value} onChange={e => handleInputChange(e)}></input>
+                    <input id="name" name="name" type="text" className="form-control" placeholder={'Nom du pokémon'} value={form.name.value} onChange={e => handleInputChange(e)}></input>
                 </div>
                 {/* Pokemon hp */}
                 <div className="form-group">
                     <label htmlFor="hp">Point de vie</label>
-                    <input id="hp" name="hp" type="number" className="form-control" min="0" placeholder={'Point de vie '} value={form.cp.value} onChange={e => handleInputChange(e)}></input>
+                    <input id="hp" name="hp" type="number" className="form-control" min="0"  value={form.cp.value} onChange={e => handleInputChange(e)}/>
                 </div>
                 {/* Pokemon cp */}
                 <div className="form-group">
                     <label htmlFor="cp">Dégâts</label>
-                    <input id="cp" name="cp" type="number" className="form-control" min="0" placeholder={'Dégâts'} value={form.hp.value} onChange={e => handleInputChange(e)}></input>
+                    <input id="cp" name="cp" type="number" className="form-control" min="0" placeholder={'Dégâts'} value={form.hp.value} onChange={e => handleInputChange(e)} />
                 </div>
                 {/* Pokemon types */}
                 <div className="form-group">
