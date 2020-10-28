@@ -9,7 +9,11 @@ const Pokemonlist: FunctionComponent = () => {
 
 
     useEffect(() => {
-        setPokemons(POKEMONS);
+        fetch('http://localhost:3001/pokemons')
+        .then(response => response.json())
+        .then((pokemons) => {
+            setPokemons(pokemons)
+        });
     }, []);
     return (
         <div>
