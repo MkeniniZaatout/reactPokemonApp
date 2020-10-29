@@ -2,6 +2,7 @@ import React, { FunctionComponent, useState } from 'react';
 import Pokemon from '../models/pokemon';
 import formatType from '../helpers/format-type';
 import { useHistory } from 'react-router-dom';
+import PokemonService from '../services/pokemon-service';
 type Props = {
   pokemon: Pokemon
 };
@@ -69,8 +70,14 @@ const PokemonForm: FunctionComponent<Props> = ({pokemon}) => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formIsValid: boolean|undefined = validateForm();
-        if(formIsValid){
-            history.push(`/pokemons/${pokemon.id}`);
+        
+        if(formIsValid) {
+            pokemon.name = form.name.value;
+            pokemon.cp = form.cp.value;
+            pokemon.hp = form.hp.value;
+            pokemon.types = form.types.value;
+            PokemonService.updatePokemon(pokemon).then(()=> { history.push(`/pokemons/${pokemon.id}`) });
+            // history.push(`/pokemons/${pokemon.id}`);
         }
     }
 
@@ -122,6 +129,12 @@ const PokemonForm: FunctionComponent<Props> = ({pokemon}) => {
         return true;
     }
 
+    const deletePokemon = () => {
+        if (window.confirm("Voulez-vous vraiment supprimer le pokemon ?")) { 
+            PokemonService.deletePokemon(pokemon.id).then(() => history.push(`/pokemons`) );
+        }
+    }
+
     return (
     <form onSubmit={(e) => handleSubmit(e)}>
         <div className="row">
@@ -129,13 +142,16 @@ const PokemonForm: FunctionComponent<Props> = ({pokemon}) => {
             <div className="card hoverable"> 
             <div className="card-image">
                 <img src={pokemon.picture} alt={pokemon.name} style={{width: '250px', margin: '0 auto'}}/>
+            <span className='btn-floating halfway-fab waves-effect waves-light'>
+                <i onClick={deletePokemon} className='material-icons'>delete</i>
+            </span>
             </div>
             <div className="card-stacked">
                 <div className="card-content">
                 {/* Pokemon name */}
                 <div className="form-group">
                     <label htmlFor="name">Nom</label>
-                    <input id="name" name="name" type="text" pattern="[a-zA-ZÀ-ÿ]" className="form-control" placeholder={'Nom du pokémon'} value={form.name.value} onChange={e => handleInputChange(e)} required></input>
+                    <input id="name" name="name" type="text" className="form-control" placeholder={'Nom du pokémon'} value={form.name.value} onChange={e => handleInputChange(e)} required></input>
                 {form.name.error && 
                 <div className="card-panel red accent-1">
                     {form.name.error}
@@ -158,7 +174,7 @@ const PokemonForm: FunctionComponent<Props> = ({pokemon}) => {
                     {types.map(type => (
                     <div key={type} style={{marginBottom: '10px'}}>
                         <label>
-                        <input id={type} type="checkbox" className="filled-in" value={form.types.value.toString()} checked={hasType(type)} onChange={e => selectType(type, e)} disabled={!isTypeValid(type)} required></input>
+                        <input id={type} type="checkbox" className="filled-in" value={form.types.value.toString()} checked={hasType(type)} onChange={e => selectType(type, e)} disabled={!isTypeValid(type)} ></input>
                         <span>
                             <p className={formatType(type)}>{ type }</p>
                         </span>

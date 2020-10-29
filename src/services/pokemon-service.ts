@@ -21,14 +21,20 @@ export default class PokemonService {
             body: JSON.stringify(pokemon),
             headers: { 'Content-Type': 'application/json' }
         }).then(res=> res.json()).catch(error => this.handleError(error));
-    
+    }
+
+    static deletePokemon(pokemonId: Number) {
+        return fetch(`http://localhost:3001/pokemons/${pokemonId}`, {
+            method: 'DELETE',
+            headers: {'Content-Type': 'application/json' }
+        })
+        .then(res => res.json()).catch(err => this.handleError(err));
     }
 
     static handleError(error: Error): void {
         console.error(error);
         throw new Error(error.toString());
     }
-
 
     static isEmpty(data: Object): boolean {
         return Object.keys(data).length === 0;
