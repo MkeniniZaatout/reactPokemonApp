@@ -1,18 +1,6 @@
 {
   "pokemons": [
     {
-      "id": 1,
-      "name": "Bulbi",
-      "hp": "250",
-      "cp": 5,
-      "picture": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png",
-      "types": [
-        "Plante",
-        "Poison",
-        "Insecte"
-      ]
-    },
-    {
       "id": 2,
       "name": "Salamèche",
       "hp": 28,
