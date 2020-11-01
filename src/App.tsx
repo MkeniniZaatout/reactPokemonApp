@@ -1,11 +1,14 @@
 import React, { FunctionComponent } from 'react';
 import Pokemonlist from './pages/pokemon-list';
 import PokemonDetail from './pages/pokemon-detail';
+import PokemonAjout from './pages/pokemon-ajout';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 // import { FruitsAPI, Fruit, currentUserd} from './quelque-part'
 // J'ajoute ça peut être -> import POKEMONS from './models/mock-pokemons';
 import PokemonEdit from './pages/pokemon-edit'
 import PageNotfound from './pages/page-not-found';
+import { Icon, InlineIcon } from '@iconify/react';
+import pokemonIcon from '@iconify/icons-simple-icons/pokemon';
 
 const App: FunctionComponent = () => {
     return (
@@ -15,6 +18,7 @@ const App: FunctionComponent = () => {
             <nav>
                 <div className='nav-wrapper teal'>
                     <Link to="/" className="brand-logo center">Pokédex</Link>
+                    <Icon icon={pokemonIcon} />
                 </div>
             </nav>
             {/* Le systeme de gestion des routes de notre application */}
@@ -22,6 +26,7 @@ const App: FunctionComponent = () => {
                 <Route exact path="/" component={Pokemonlist} />
                 <Route exact path="/pokemons" component={Pokemonlist} />
                 <Route exact path="/pokemons/:id" component={PokemonDetail} />
+                <Route exact path="/add" component={PokemonAjout} />
                 {/** 404 Page not found : Toujours à mettre à la fin des route 
                  * sinon toute les routes seront intercepter par la route PageNotfound */}
                 <Route path="/pokemons/edit/:id" component={PokemonEdit} />

@@ -3,8 +3,10 @@ import Pokemon from '../models/pokemon';
 import formatType from '../helpers/format-type';
 import { useHistory } from 'react-router-dom';
 import PokemonService from '../services/pokemon-service';
+
 type Props = {
-  pokemon: Pokemon
+  pokemon: Pokemon,
+  isEditForm: boolean
 };
 
 type Field = {
@@ -17,11 +19,12 @@ type Form = {
     name: Field,
     hp: Field,
     cp: Field,
-    types: Field
+    types: Field,
+    picture: Field
 }
 
 // ToDo : comprendre comment l'objet pokemon est récupéré entierement ? -> recuperer dans pokemon-edit avec useState
-const PokemonForm: FunctionComponent<Props> = ({pokemon}) => {
+const PokemonForm: FunctionComponent<Props> = ({pokemon, isEditForm}) => {
     const history:any = useHistory();
 
     let pokemonInfo = {
@@ -29,6 +32,7 @@ const PokemonForm: FunctionComponent<Props> = ({pokemon}) => {
         hp: { value: pokemon.hp, isValid: true},
         cp: { value: pokemon.cp, isValid: true},
         types: { value: pokemon.types, isValid: true},
+        picture: { value: pokemon.picture, isValid: true}
     };
     // get pokemonInfo with useState type form FROM pokemon-detail 
     const [form, setForm] = useState<Form>(pokemonInfo);
@@ -72,18 +76,42 @@ const PokemonForm: FunctionComponent<Props> = ({pokemon}) => {
         const formIsValid: boolean|undefined = validateForm();
         
         if(formIsValid) {
+            pokemon.picture = form.picture.value;
             pokemon.name = form.name.value;
             pokemon.cp = form.cp.value;
             pokemon.hp = form.hp.value;
             pokemon.types = form.types.value;
-            PokemonService.updatePokemon(pokemon).then(()=> { history.push(`/pokemons/${pokemon.id}`) });
+            
+            isEditForm? PokemonService.updatePokemon(pokemon).then(()=> { history.push(`/pokemons/${pokemon.id}`) }) : addPokemon();
             // history.push(`/pokemons/${pokemon.id}`);
         }
+    }
+
+    const addPokemon = () => {
+        PokemonService.addPokemons(pokemon).then( () => { history.push('/pokemons') })
+    }
+
+    const isAddForm = () => {
+        return !isEditForm;
     }
 
     const validateForm = (): boolean|undefined => {
         let newForm: Form = form;
         
+        // Validator url to check if is Add Or Edit for pokemon Picture in page
+        if(isAddForm()) {
+            const start = "https://assets.pokemon.com/assets/css2/img/pokedex/detail";
+            const end = ".png";
+            let newField: Field = {};
+            if(!form.picture.value.startsWith(start) || !form.picture.value.endWith(end) ) {
+                const errorMsg = "";
+                newField = { value: form.picture.value, error: errorMsg, isValid: false };
+            } else {
+                newField = { value: form.picture.value, error: '', isValid: true };
+            }
+            newForm = { ...form, ...{picture: newField}};
+        }
+
         // Validator name
         if(!/^[a-zA-Zàéè ]{3,25}$/.test(form.name.value)) {
           const errorMsg: string = 'Le nom du pokémon est requis (1-25).';
@@ -140,11 +168,27 @@ const PokemonForm: FunctionComponent<Props> = ({pokemon}) => {
         <div className="row">
         <div className="col s12 m8 offset-m2">
             <div className="card hoverable"> 
+            {isEditForm && (
             <div className="card-image">
                 <img src={pokemon.picture} alt={pokemon.name} style={{width: '250px', margin: '0 auto'}}/>
-            <span className='btn-floating halfway-fab waves-effect waves-light'>
-                <i onClick={deletePokemon} className='material-icons'>delete</i>
-            </span>
+                <span className='btn-floating halfway-fab waves-effect waves-light'>
+                    <i onClick={deletePokemon} className='material-icons'>delete</i>
+                </span>
+            </div>
+            )}
+            {/* Pokemon Image */}
+            <div className="card-stacked">
+                <div className="card-content">
+                    <div className="form-group">
+                        <label htmlFor="picture">Image</label>
+                        <input id="picture" name="picture" type="text" className="form-control" value={form.picture.value} onChange={e => handleInputChange(e)} required></input>
+                        {/* error */}
+                        {form.picture.error && 
+                        <div className="card-panel red accent-1">
+                            {form.picture.error}
+                        </div>}
+                    </div>
+                </div>
             </div>
             <div className="card-stacked">
                 <div className="card-content">

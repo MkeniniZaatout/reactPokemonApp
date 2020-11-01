@@ -114,6 +114,16 @@
       "types": [
         "Feu"
       ]
+    },
+    {
+      "id": 1604238073806,
+      "hp": 100,
+      "cp": 10,
+      "name": "Voltorbe",
+      "picture": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/100.png",
+      "types": [
+        "Electrik"
+      ]
     }
   ]
 }

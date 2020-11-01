@@ -3,6 +3,17 @@ import Pokemon from '../models/pokemon';
 
 export default class PokemonService {
     
+    static addPokemons(pokemon: Pokemon): Promise<Pokemon|null> {
+        // Date de creation ajouté automatiquement.
+        delete pokemon.created;
+        
+        return fetch(`http://localhost:3001/pokemons`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(pokemon),
+        }).then(res=> res.json()).catch(error => this.handleError(error));
+    }
+
     static getPokemons(): Promise<Pokemon[]> {
         return fetch('http://localhost:3001/pokemons')
         .then(response => response.json());
@@ -33,6 +44,7 @@ export default class PokemonService {
 
     static handleError(error: Error): void {
         console.error(error);
+        console.log(error.toString());
         throw new Error(error.toString());
     }
 
