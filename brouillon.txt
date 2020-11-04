@@ -1,0 +1,3 @@
+Theme à revoir :
+
+-Props, Formulaire->cas d'erreur, POST d'info dans un formulaire, Promise<> et new Promise(), PrivateRoute

@@ -1,6 +1,6 @@
 export default class Authentication {
 
-    static isAuthentication: boolean = false;
+    static isAuthenticated: boolean = false;
 
     static login(userName:string, mdp: string) : Promise<boolean> {
 
@@ -8,7 +8,7 @@ export default class Authentication {
 
         return new Promise(resolve => {
             setTimeout(() => {
-                this.isAuthentication = isAuthentication;
+                this.isAuthenticated = isAuthentication;
                 resolve(isAuthentication);
             }, 1000);
         })

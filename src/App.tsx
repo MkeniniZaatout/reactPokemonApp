@@ -8,8 +8,11 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import PokemonEdit from './pages/pokemon-edit'
 import PageNotfound from './pages/page-not-found';
 import Login from './pages/login';
+import PrivateRoute from './PrivateRoute';
+
 import { Icon, InlineIcon } from '@iconify/react';
 import pokemonIcon from '@iconify/icons-simple-icons/pokemon';
+
 
 const App: FunctionComponent = () => {
     return (
@@ -24,14 +27,14 @@ const App: FunctionComponent = () => {
             </nav>
             {/* Le systeme de gestion des routes de notre application */}
             <Switch>
-                <Route exact path="/" component={Pokemonlist} />
+                <PrivateRoute exact path="/" component={Pokemonlist} />
                 <Route exact path="/login" component={Login} />
-                <Route exact path="/pokemons" component={Pokemonlist} />
-                <Route exact path="/pokemons/:id" component={PokemonDetail} />
-                <Route exact path="/add" component={PokemonAjout} />
+                <PrivateRoute exact path="/pokemons" component={Pokemonlist} />
+                <PrivateRoute exact path="/pokemons/:id" component={PokemonDetail} />
+                <PrivateRoute exact path="/add" component={PokemonAjout} />
                 {/** 404 Page not found : Toujours à mettre à la fin des route 
                  * sinon toute les routes seront intercepter par la route PageNotfound */}
-                <Route path="/pokemons/edit/:id" component={PokemonEdit} />
+                <PrivateRoute path="/pokemons/edit/:id" component={PokemonEdit} />
                 <Route component={PageNotfound} />
             </Switch>
         </div>
