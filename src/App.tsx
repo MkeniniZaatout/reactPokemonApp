@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 // J'ajoute ça peut être -> import POKEMONS from './models/mock-pokemons';
 import PokemonEdit from './pages/pokemon-edit'
 import PageNotfound from './pages/page-not-found';
+import Login from './pages/login';
 import { Icon, InlineIcon } from '@iconify/react';
 import pokemonIcon from '@iconify/icons-simple-icons/pokemon';
 
@@ -24,6 +25,7 @@ const App: FunctionComponent = () => {
             {/* Le systeme de gestion des routes de notre application */}
             <Switch>
                 <Route exact path="/" component={Pokemonlist} />
+                <Route exact path="/login" component={Login} />
                 <Route exact path="/pokemons" component={Pokemonlist} />
                 <Route exact path="/pokemons/:id" component={PokemonDetail} />
                 <Route exact path="/add" component={PokemonAjout} />
