@@ -4,7 +4,10 @@ import Pokemon from '../models/pokemon';
 import POKEMONS from '../models/mock-pokemon';
 import formatDate from '../helpers/format-date';
 import formatType from '../helpers/format-type';
+import Loader from '../components/loader';
+
 import '../components/pokemon-detail.css';
+
 
 type Params = { id: string };
   
@@ -74,10 +77,7 @@ const PokemonsDetail: FunctionComponent<RouteComponentProps<Params>> = ({ match 
         </div>
       ) : (
     <div className="center">
-        <h4 >Aucun pokémon à afficher !</h4>
-        <Link to="/" className="waves-effect waves-teal btn-flat">
-        Retourner à l'accueil
-        </Link>
+        <h4 className='card-action'> <Loader></Loader> </h4>
     </div>
       )}
     </div>
