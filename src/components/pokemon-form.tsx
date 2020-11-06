@@ -3,6 +3,8 @@ import Pokemon from '../models/pokemon';
 import formatType from '../helpers/format-type';
 import { useHistory } from 'react-router-dom';
 import PokemonService from '../services/pokemon-service';
+import Button from 'react-bootstrap/Button';
+
 
 type Props = {
   pokemon: Pokemon,
@@ -88,7 +90,7 @@ const PokemonForm: FunctionComponent<Props> = ({pokemon, isEditForm}) => {
     }
 
     const addPokemon = () => {
-        PokemonService.addPokemons(pokemon).then( () => { history.push('/pokemons') })
+        PokemonService.addPokemon(pokemon).then( () => { history.push('/pokemons') })
     }
 
     const isAddForm = () => {
@@ -159,7 +161,7 @@ const PokemonForm: FunctionComponent<Props> = ({pokemon, isEditForm}) => {
 
     const deletePokemon = () => {
         if (window.confirm("Voulez-vous vraiment supprimer le pokemon ?")) { 
-            PokemonService.deletePokemon(pokemon.id).then(() => history.push(`/pokemons`) );
+            PokemonService.deletePokemon(pokemon).then(() => history.push(`/pokemons`) );
         }
     }
 
@@ -229,7 +231,7 @@ const PokemonForm: FunctionComponent<Props> = ({pokemon, isEditForm}) => {
                 </div>
                 <div className="card-action center">
                 {/* Submit button */}
-                <button type="submit" className="btn">Valider</button>
+                <Button type="submit" className="btn">Valider</Button>
                 </div>
             </div>
             </div>

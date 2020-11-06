@@ -4,6 +4,7 @@ import Pokemon from '../models/pokemon';
 import POKEMONS from '../models/mock-pokemon';
 import { useHistory } from 'react-router-dom';
 import PokemonSearch from '../components/pokemon-search';
+import Button from 'react-bootstrap/Button';
 
 const Pokemonlist: FunctionComponent = () => {
 
@@ -22,7 +23,7 @@ const Pokemonlist: FunctionComponent = () => {
             <h1 className="center">Pokédex</h1>
             <div className="container">
                 <div className="center">
-                    <button onClick={() => {history.push(`/add`);}}>Ajouter un pokemon</button>
+                    <Button onClick={() => {history.push(`/add`);}}>Ajouter un pokemon</Button>
                 </div>
                 <PokemonSearch/>
                 <div className="row">                

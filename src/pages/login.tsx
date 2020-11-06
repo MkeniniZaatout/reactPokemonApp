@@ -1,6 +1,8 @@
 import React, { FunctionComponent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import AuthenticationService from '../services/authentication-service';
+import Button from 'react-bootstrap/Button';
+
 // L 1 à 23 mettre en place l'etat du formulaire comme sur pokemon-form
 
 
@@ -116,7 +118,7 @@ const Login: FunctionComponent = () => {
               </div>
               <div className="card-action center">
                 {/* Submit button */}
-                <button type="submit" className="btn">Valider</button>
+                <Button type="submit" className="btn">Valider</Button>
               </div>
             </div>
           </div>

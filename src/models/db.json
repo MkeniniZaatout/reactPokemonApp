@@ -112,6 +112,17 @@
       "types": [
         "Electrik"
       ]
+    },
+    {
+      "id": 1604656244097,
+      "hp": 100,
+      "cp": 10,
+      "name": "Smogogo",
+      "picture": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/110.png",
+      "types": [
+        "Normal",
+        "Poison"
+      ]
     }
   ]
 }
