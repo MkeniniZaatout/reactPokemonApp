@@ -1,7 +1,6 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
 import PokemonCard from '../components/pokemon-card';
 import Pokemon from '../models/pokemon';
-import POKEMONS from '../models/mock-pokemon';
 import { useHistory } from 'react-router-dom';
 import PokemonSearch from '../components/pokemon-search';
 import Button from 'react-bootstrap/Button';

@@ -1,7 +1,5 @@
-import React, { FunctionComponent, useState, useEffect } from 'react';
-import { RouteComponentProps, Link } from 'react-router-dom';
+import React, { FunctionComponent, useState } from 'react';
 import Pokemon from '../models/pokemon';
-import formatType from '../helpers/format-type';
 import PokemonForm from '../components/pokemon-form';
 
 const PokemonAjout: FunctionComponent = () => {

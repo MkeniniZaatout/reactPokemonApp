@@ -10,10 +10,6 @@ import PageNotfound from './pages/page-not-found';
 import Login from './pages/login';
 import PrivateRoute from './PrivateRoute';
 
-import { Icon, InlineIcon } from '@iconify/react';
-import pokemonIcon from '@iconify/icons-simple-icons/pokemon';
-
-
 const App: FunctionComponent = () => {
     return (
     <Router>
@@ -22,7 +18,6 @@ const App: FunctionComponent = () => {
             <nav>
                 <div className='nav-wrapper teal'>
                     <Link to="/" className="brand-logo center">Pokédex</Link>
-                    <Icon icon={pokemonIcon} />
                 </div>
             </nav>
             {/* Le systeme de gestion des routes de notre application */}
