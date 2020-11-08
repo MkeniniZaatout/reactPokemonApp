@@ -1,9 +1,9 @@
 import React, { FunctionComponent, useState } from 'react';
+import Button from 'react-bootstrap/Button';
 import Pokemon from '../models/pokemon';
 import formatType from '../helpers/format-type';
 import { useHistory } from 'react-router-dom';
 import PokemonService from '../services/pokemon-service';
-import Button from 'react-bootstrap/Button';
 
 
 type Props = {
@@ -173,9 +173,9 @@ const PokemonForm: FunctionComponent<Props> = ({pokemon, isEditForm}) => {
             {isEditForm && (
             <div className="card-image">
                 <img src={pokemon.picture} alt={pokemon.name} style={{width: '250px', margin: '0 auto'}}/>
-                <span className='btn-floating halfway-fab waves-effect waves-light'>
+                <Button className='btn-floating halfway-fab waves-effect waves-light'>
                     <i onClick={deletePokemon} className='material-icons'>delete</i>
-                </span>
+                </Button>
             </div>
             )}
             {/* Pokemon Image */}

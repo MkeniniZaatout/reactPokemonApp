@@ -68,7 +68,7 @@ const PokemonsDetail: FunctionComponent<RouteComponentProps<Params>> = ({ match 
                   </table>
                 </div>
                 <div className="card-action">
-                  <Link to="/">Retour</Link>
+                  <Link to="/" className='btn'>Retour</Link>
                 </div>
               </div>
             </div>
